@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Bönan & Koppen - Handplockade kaffebönor från lokala rosterier. Upptäck unika, hållbara kaffesorter.">
+  <title>Bönan & Koppen | Premium Kaffe</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo" onclick="showPage('home')">
+        <img src="/images/logo.png" alt="Bönan & Koppen" class="logo-image">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#" class="active" onclick="showPage('home')">Produkter</a></li>
+        <li><a href="#" onclick="showPage('about')">Om Oss</a></li>
+        <li><a href="#" onclick="showPage('contact')">Kontakt</a></li>
+      </ul>
+
+      <button class="cart-btn" onclick="showPage('cart')">
+        🛒 Varukorg
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Home / Products Page -->
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <h1>Handplockade Kaffebönor</h1>
+        <p>Upptäck unika kaffesorter från Sveriges bästa lokala rosterier. Kvalitet, hållbarhet och smak i varje kopp.
+        </p>
+      </section>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Products loaded dynamically -->
+      </div>
+    </div>
+
+    <!-- Product Detail Page -->
+    <div id="page-product" class="page">
+      <a href="#" onclick="showPage('home')" class="btn btn-secondary" style="margin-bottom: var(--spacing-lg);">
+        ← Tillbaka till produkter
+      </a>
+      <div class="product-detail" id="product-detail">
+        <!-- Product details loaded dynamically -->
+      </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="page-cart" class="page">
+      <h2 style="margin-bottom: var(--spacing-xl);">Din Varukorg</h2>
+      <div class="cart-container">
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items loaded dynamically -->
+        </div>
+
+        <div class="cart-summary" id="cart-summary">
+          <h3>Sammanfattning</h3>
+          <div class="summary-row">
+            <span>Delsumma</span>
+            <span id="subtotal">0 kr</span>
+          </div>
+          <div class="summary-row">
+            <span>Frakt</span>
+            <span id="shipping">49 kr</span>
+          </div>
+          <div class="summary-row total">
+            <span>Totalt</span>
+            <span id="total">49 kr</span>
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="showPage('checkout')" id="checkout-btn">
+            Gå till kassan →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="page-checkout" class="page">
+      <h2 style="margin-bottom: var(--spacing-xl);">Kassa</h2>
+      <div class="checkout-container">
+        <form class="checkout-form" id="checkout-form" onsubmit="handleCheckout(event)">
+          <div class="form-section">
+            <h3><span class="step-number">1</span> Leveransinformation</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstName">Förnamn</label>
+                <input type="text" id="firstName" name="firstName" required placeholder="Anna">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Efternamn</label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Andersson">
+              </div>
+              <div class="form-group full-width">
+                <label for="email">E-post</label>
+                <input type="email" id="email" name="email" required placeholder="anna@exempel.se">
+              </div>
+              <div class="form-group full-width">
+                <label for="address">Adress</label>
+                <input type="text" id="address" name="address" required placeholder="Kaffegatan 12">
+              </div>
+              <div class="form-group">
+                <label for="postalCode">Postnummer</label>
+                <input type="text" id="postalCode" name="postalCode" required placeholder="123 45">
+              </div>
+              <div class="form-group">
+                <label for="city">Ort</label>
+                <input type="text" id="city" name="city" required placeholder="Stockholm">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3><span class="step-number">2</span> Betalning</h3>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="cardNumber">Kortnummer</label>
+                <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456"
+                  maxlength="19">
+              </div>
+              <div class="form-group">
+                <label for="expiry">Giltig t.o.m.</label>
+                <input type="text" id="expiry" name="expiry" required placeholder="MM/ÅÅ" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label for="cvc">CVC</label>
+                <input type="text" id="cvc" name="cvc" required placeholder="123" maxlength="3">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg">
+            ✓ Slutför köp & Betala
+          </button>
+        </form>
+
+        <div class="order-summary">
+          <h3>Din beställning</h3>
+          <div class="order-items" id="order-items">
+            <!-- Order items loaded dynamically -->
+          </div>
+          <div class="summary-row">
+            <span>Delsumma</span>
+            <span id="order-subtotal">0 kr</span>
+          </div>
+          <div class="summary-row">
+            <span>Frakt</span>
+            <span>49 kr</span>
+          </div>
+          <div class="summary-row total">
+            <span>Att betala</span>
+            <span id="order-total">49 kr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Page -->
+    <div id="page-success" class="page">
+      <div class="success-message">
+        <div class="success-icon">✓</div>
+        <h1>Tack för din beställning!</h1>
+        <p>Din beställning har tagits emot och vi börjar plocka ihop dina kaffebönor.</p>
+        <div class="order-id" id="order-id">ORD-123456</div>
+        <p style="color: var(--text-secondary); margin-top: var(--spacing-lg);">
+          En bekräftelse har skickats till din e-post.
+        </p>
+        <button class="btn btn-primary btn-lg" onclick="continueShopping()" style="margin-top: var(--spacing-xl);">
+          Fortsätt handla
+        </button>
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="page-about" class="page">
+      <div class="about-container">
+        <section class="hero">
+          <h1>Om Bönan & Koppen</h1>
+          <p>Passionen för kaffe som blev ett äventyr</p>
+        </section>
+
+        <div class="about-content">
+          <div class="about-section">
+            <h2>☕ Vår Historia</h2>
+            <p>Bönan & Koppen grundades 2025 av en klass på KYH Devsecops 2025 (Grupp 6). Det som började som ett
+              skolprojekt växte snabbt till en vision om att digitalisera och tillgängliggöra Sveriges bästa
+              kaffeupplevelser.</p>
+            <p>Med en gemensam kärlek för teknik och specialkaffe bestämde vi oss för att bygga en plattform som knyter
+              samman kaffeälskare med lokala mikrorosterier.</p>
+            <p>Idag samarbetar vi med över 15 hantverksrosterier från Malmö till Luleå, alla utvalda för sin passion för
+              kvalitet och hållbarhet.</p>
+          </div>
+
+          <div class="about-section">
+            <h2>🌱 Hållbarhet i Varje Kopp</h2>
+            <p>Vi tror på att gott kaffe inte ska kosta jorden – bokstavligt talat. Därför arbetar vi enbart med
+              rosterier som:</p>
+            <ul class="about-list">
+              <li>Köper in bönor via direkthandel med odlare</li>
+              <li>Prioriterar ekologiska och Fairtrade-certifierade produkter</li>
+              <li>Använder förnybar energi i rostningsprocessen</li>
+              <li>Förpackar i återvinningsbara eller komposterbara material</li>
+            </ul>
+          </div>
+
+          <div class="about-section">
+            <h2>👥 Teamet</h2>
+            <div class="team-grid">
+              <div class="team-member">
+                <div class="team-avatar">👨‍💼</div>
+                <h4>Akin Köksal</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Visionären bakom Bönan & Koppen.</p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">👩‍💻</div>
+                <h4>Kristabel Fadi Ilias</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Digital strateg och kreatör.</p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">👨‍💻</div>
+                <h4>Kobin Lalo</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Utveckling och teknisk arkitektur.</p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">👩‍💼</div>
+                <h4>Tuva-Li Nora Eriksson</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Marknadsföring och kundrelationer.</p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">👩‍💼</div>
+                <h4>Theresa Dunca</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Design och användarupplevelse.</p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">👨‍💼</div>
+                <h4>Fuad Emad Kassem Abed Ali</h4>
+                <p class="team-role">Medgrundare</p>
+                <p>Affärsutveckling och logistik.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section highlight">
+            <h2>🏆 Våra Värderingar</h2>
+            <div class="values-grid">
+              <div class="value-item">
+                <span class="value-icon">🎯</span>
+                <h4>Kvalitet</h4>
+                <p>Endast de bästa bönorna</p>
+              </div>
+              <div class="value-item">
+                <span class="value-icon">🤝</span>
+                <h4>Transparens</h4>
+                <p>Fullständig spårbarhet</p>
+              </div>
+              <div class="value-item">
+                <span class="value-icon">🌍</span>
+                <h4>Hållbarhet</h4>
+                <p>Miljön i fokus</p>
+              </div>
+              <div class="value-item">
+                <span class="value-icon">❤️</span>
+                <h4>Passion</h4>
+                <p>Kaffe är vår grej</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="page-contact" class="page">
+      <div class="contact-container">
+        <section class="hero">
+          <h1>Kontakta Oss</h1>
+          <p>Vi älskar att höra från kaffeälskare!</p>
+        </section>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-card">
+              <h3>📍 Besöksadress</h3>
+              <p>Bönan & Koppen AB</p>
+              <p>Kaffevägen 42, 3tr</p>
+              <p>111 22 Stockholm</p>
+            </div>
+
+            <div class="contact-card">
+              <h3>📞 Telefon</h3>
+              <p><a href="tel:+46812345678">08-123 456 78</a></p>
+              <p class="contact-hours">Mån-Fre: 09:00 - 17:00</p>
+            </div>
+
+            <div class="contact-card">
+              <h3>✉️ E-post</h3>
+              <p><a href="mailto:hej@bonankoppen.se">hej@bonankoppen.se</a></p>
+              <p><a href="mailto:support@bonankoppen.se">support@bonankoppen.se</a></p>
+            </div>
+
+            <div class="contact-card">
+              <h3>🌐 Sociala Medier</h3>
+              <div class="social-links">
+                <a href="#" class="social-link">📸 Instagram</a>
+                <a href="#" class="social-link">📘 Facebook</a>
+                <a href="#" class="social-link">🐦 Twitter</a>
+              </div>
+            </div>
+
+            <div class="contact-card highlight">
+              <h3>🚚 Leveransinformation</h3>
+              <p><strong>Fri frakt</strong> vid köp över 500 kr!</p>
+              <p>Standard: 2-4 arbetsdagar</p>
+              <p>Express: Nästa arbetsdag (beställ före 14:00)</p>
+            </div>
+          </div>
+
+          <div class="contact-form-section">
+            <h3>Skicka ett meddelande</h3>
+            <form class="contact-form" onsubmit="handleContactForm(event)">
+              <div class="form-group">
+                <label for="contact-name">Namn</label>
+                <input type="text" id="contact-name" name="name" required placeholder="Ditt namn">
+              </div>
+              <div class="form-group">
+                <label for="contact-email">E-post</label>
+                <input type="email" id="contact-email" name="email" required placeholder="din@email.se">
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Ämne</label>
+                <select id="contact-subject" name="subject" required>
+                  <option value="">Välj ämne...</option>
+                  <option value="order">Fråga om beställning</option>
+                  <option value="product">Produktfrågor</option>
+                  <option value="business">Företagssamarbete</option>
+                  <option value="other">Övrigt</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Meddelande</label>
+                <textarea id="contact-message" name="message" rows="5" required
+                  placeholder="Skriv ditt meddelande här..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">
+                Skicka meddelande →
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="faq-section">
+          <h2>Vanliga Frågor</h2>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h4>Hur lång tid tar leveransen?</h4>
+              <p>Standardleverans tar 2-4 arbetsdagar. Express-leverans anländer nästa arbetsdag om du beställer före kl
+                14:00.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Kan jag returnera produkter?</h4>
+              <p>Ja! Du har 14 dagars ångerrätt på oöppnade förpackningar. Kontakta oss för returinstruktioner.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Hur förvarar jag kaffet?</h4>
+              <p>Förvara kaffet svalt, torrt och mörkt i en lufttät behållare. Undvik kylskåp då det kan absorbera fukt
+                och lukter.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Säljer ni till företag?</h4>
+              <p>Absolut! Vi erbjuder företagsavtal med rabatt och automatiska leveranser. Kontakta oss för offert.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Bönan & Koppen. Handplockat kaffe för dig som älskar kvalitet.</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast toast-success" id="toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toast-message">Tillagd i varukorgen</span>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+
+</html>
