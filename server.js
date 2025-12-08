@@ -154,16 +154,22 @@ app.get('*', (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
     const interfaces = os.networkInterfaces();
     let ipAddress = 'localhost';
+    const availableInterfaces = [];
 
     for (const name of Object.keys(interfaces)) {
         for (const interface of interfaces[name]) {
             // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
             if (interface.family === 'IPv4' && !interface.internal) {
-                ipAddress = interface.address;
-                break;
+                availableInterfaces.push(interface.address);
             }
         }
     }
+
+    // Prioritize non-Docker IPs (Docker usually uses 172.x.x.x)
+    // We prefer 192.168.x.x, 10.x.x.x, or public IPs
+    const preferredIp = availableInterfaces.find(ip => !ip.startsWith('172.'));
+
+    ipAddress = preferredIp || availableInterfaces[0] || 'localhost';
 
     console.log(`☕ Bönan & Koppen körs på http://${ipAddress}:${PORT}`);
 });
