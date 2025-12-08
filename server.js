@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -150,6 +151,19 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`☕ Bönan & Koppen körs på http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    const interfaces = os.networkInterfaces();
+    let ipAddress = 'localhost';
+
+    for (const name of Object.keys(interfaces)) {
+        for (const interface of interfaces[name]) {
+            // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+            if (interface.family === 'IPv4' && !interface.internal) {
+                ipAddress = interface.address;
+                break;
+            }
+        }
+    }
+
+    console.log(`☕ Bönan & Koppen körs på http://${ipAddress}:${PORT}`);
 });
