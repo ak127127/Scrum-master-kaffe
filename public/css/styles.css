@@ -1021,7 +1021,7 @@ a:hover {
   }
 
   .values-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .contact-grid {
@@ -1030,6 +1030,13 @@ a:hover {
 
   .faq-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-section {
+    padding: var(--spacing-md);
+    /* Reduced padding on mobile */
+    overflow-wrap: break-word;
+    /* Prevent text overflow */
   }
 }
 
