@@ -1348,5 +1348,41 @@ a:hover {
   width: 100%;
 }
 
+/* Mobile Layout Fixes (Moved to end to override default styles) */
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--spacing-xl);
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Ensure content doesn't overflow cards */
+  .about-section,
+  .contact-card,
+  .team-member,
+  .value-item {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    /* Modern standard */
+    min-width: 0;
+    /* Allow grid items to shrink below content size */
+  }
+
+  .team-member {
+    padding: var(--spacing-md);
+  }
+}
+
 /* Font Import - Load last for performance */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
