@@ -376,3 +376,26 @@ document.querySelectorAll(".nav-links a").forEach((n) =>
     navLinks.classList.remove("active");
   })
 );
+// Auth functions
+function handleLogin(event) {
+  event.preventDefault();
+  const email = document.getElementById('login-email').value;
+
+  // Simulate API call
+  console.log('Logging in:', email);
+
+  showToast('Inloggad! Välkommen tillbaka.');
+  setTimeout(() => showPage('home'), 1500);
+}
+
+function handleRegister(event) {
+  event.preventDefault();
+  const name = document.getElementById('reg-name').value;
+  const email = document.getElementById('reg-email').value;
+
+  // Simulate API call
+  console.log('Registering:', { name, email });
+
+  showToast('Konto skapat! Välkommen.');
+  setTimeout(() => showPage('home'), 1500);
+}

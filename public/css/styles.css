@@ -1293,5 +1293,53 @@ a:hover {
   line-height: 1.6;
 }
 
+/* Auth Pages */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--accent-primary);
+}
+
+.auth-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.auth-form .form-group {
+  text-align: left;
+}
+
+.auth-footer {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
 /* Font Import - Load last for performance */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');

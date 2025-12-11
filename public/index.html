@@ -25,8 +25,8 @@
         <li><a href="#" onclick="showPage('about')">Om Oss</a></li>
         <li><a href="#" onclick="showPage('contact')">Kontakt</a></li>
         <li class="auth-separator"></li>
-        <li><a href="#" class="nav-auth-link">Logga in</a></li>
-        <li><a href="#" class="btn btn-primary btn-sm nav-auth-btn">Skapa konto</a></li>
+        <li><a href="#" onclick="showPage('login')">Logga in</a></li>
+        <li><a href="#" onclick="showPage('register')">Skapa konto</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -401,6 +401,70 @@
         </div>
       </div>
     </div>
+    <!-- Login Page -->
+    <div id="page-login" class="page">
+      <div class="auth-container">
+        <div class="auth-card">
+          <h2>Välkommen tillbaka</h2>
+          <p class="auth-subtitle">Logga in för att se dina beställningar</p>
+
+          <form class="auth-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label for="login-email">E-post</label>
+              <input type="email" id="login-email" required placeholder="namn@exempel.se">
+            </div>
+            <div class="form-group">
+              <label for="login-password">Lösenord</label>
+              <input type="password" id="login-password" required placeholder="********">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg full-width">
+              Logga in
+            </button>
+          </form>
+
+          <p class="auth-footer">
+            Har du inget konto? <a href="#" onclick="showPage('register')">Skapa konto</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="page-register" class="page">
+      <div class="auth-container">
+        <div class="auth-card">
+          <h2>Skapa konto</h2>
+          <p class="auth-subtitle">Bli medlem i Bönan & Koppen familjen</p>
+
+          <form class="auth-form" onsubmit="handleRegister(event)">
+            <div class="form-group">
+              <label for="reg-name">Namn</label>
+              <input type="text" id="reg-name" required placeholder="Förnamn Efternamn">
+            </div>
+            <div class="form-group">
+              <label for="reg-email">E-post</label>
+              <input type="email" id="reg-email" required placeholder="namn@exempel.se">
+            </div>
+            <div class="form-group">
+              <label for="reg-password">Lösenord</label>
+              <input type="password" id="reg-password" required placeholder="********">
+            </div>
+            <div class="form-group">
+              <label for="reg-confirm">Bekräfta lösenord</label>
+              <input type="password" id="reg-confirm" required placeholder="********">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg full-width">
+              Skapa konto
+            </button>
+          </form>
+
+          <p class="auth-footer">
+            Har du redan ett konto? <a href="#" onclick="showPage('login')">Logga in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer -->
