@@ -222,6 +222,46 @@ a:hover {
   justify-content: center;
 }
 
+.nav-auth-link {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  margin-right: var(--spacing-sm);
+}
+
+.nav-auth-link:hover {
+  text-decoration: underline;
+}
+
+.nav-auth-btn {
+  padding: 0.5rem 1rem !important;
+  /* Override standard link padding */
+}
+
+/* Hide separator by default, show/handle in mobile if needed */
+.auth-separator {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .nav-links {
+    align-items: center;
+  }
+
+  .auth-separator {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 var(--spacing-sm);
+  }
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
 /* Main Content */
 .main {
   max-width: 1200px;
@@ -854,15 +894,102 @@ a:hover {
   }
 }
 
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  z-index: 1001;
+  /* Above mobile menu overlay */
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--text-primary);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .header {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .main {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    /* Full width on mobile */
+    gap: var(--spacing-lg);
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .nav-links {
-    display: none;
+    position: fixed;
+    left: -100%;
+    top: 0;
+    gap: 0;
+    flex-direction: column;
+    background: rgba(13, 10, 8, 0.98);
+    width: 100%;
+    height: 100vh;
+    /* Full viewport height */
+    text-align: center;
+    transition: 0.3s;
+    justify-content: center;
+    /* Center items vertically */
+    z-index: 999;
+    /* Below hamburger, above other content */
+    padding-top: 60px;
+    /* Space for fixed header/logo if needed */
   }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.5rem;
+    padding: var(--spacing-lg) 0;
+    display: block;
+    /* Make the whole area clickable */
+  }
+
+  .auth-separator {
+    display: block;
+    width: 80%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: var(--spacing-md) auto;
+  }
+
+  .nav-auth-btn {
+    display: inline-flex !important;
+    /* Force flex since it's a btn class */
+    font-size: 1.2rem !important;
+    margin-top: var(--spacing-sm);
+  }
+
 
   .hero h1 {
     font-size: 2rem;

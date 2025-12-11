@@ -24,12 +24,22 @@
         <li><a href="#" class="active" onclick="showPage('home')">Produkter</a></li>
         <li><a href="#" onclick="showPage('about')">Om Oss</a></li>
         <li><a href="#" onclick="showPage('contact')">Kontakt</a></li>
-      </ul>
+        <li class="auth-separator"></li>
+        <li><a href="#" class="nav-auth-link">Logga in</a></li>
+        <li><a href="#" class="btn btn-primary btn-sm nav-auth-btn">Skapa konto</a></li>
 
-      <button class="cart-btn" onclick="showPage('cart')">
-        🛒 Varukorg
-        <span class="cart-count" id="cart-count">0</span>
-      </button>
+        <div class="nav-actions">
+          <button class="cart-btn" onclick="showPage('cart')">
+            🛒 Varukorg
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+
+          <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
     </nav>
   </header>
 
